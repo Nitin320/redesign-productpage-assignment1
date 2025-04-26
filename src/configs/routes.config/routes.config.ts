@@ -1,9 +1,12 @@
-import { lazy } from 'react'
-import authRoute from './authRoute'
-import othersRoute from './othersRoute'
-import type { Routes } from '@/@types/routes'
+// src/configs/routes.config/routes.config.ts
 
-export const publicRoutes: Routes = [...authRoute]
+import { lazy } from 'react';
+import authRoute from './authRoute';
+import sharedRoutes from './sharedRoutes';
+import othersRoute from './othersRoute';
+import type { Routes } from '@/@types/routes';
+
+export const publicRoutes: Routes = [...authRoute];
 
 export const protectedRoutes: Routes = [
     /** Example purpose only, please remove */
@@ -34,24 +37,15 @@ export const protectedRoutes: Routes = [
     {
         key: 'groupMenu.collapse.item1',
         path: '/group-collapse-menu-item-view-1',
-        component: lazy(
-            () => import('@/views/demo/GroupCollapseMenuItemView1'),
-        ),
+        component: lazy(() => import('@/views/demo/GroupCollapseMenuItemView1')),
         authority: [],
     },
     {
         key: 'groupMenu.collapse.item2',
         path: '/group-collapse-menu-item-view-2',
-        component: lazy(
-            () => import('@/views/demo/GroupCollapseMenuItemView2'),
-        ),
+        component: lazy(() => import('@/views/demo/GroupCollapseMenuItemView2')),
         authority: [],
     },
-    {
-        key: 'homePage',
-        path: `/hello`,
-        component: lazy(() => import('@/views/Home')),
-        authority: []
-    },
+    ...sharedRoutes,  // <-- inject shared routes here
     ...othersRoute,
-]
+];

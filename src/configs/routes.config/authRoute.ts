@@ -1,5 +1,7 @@
-import { lazy } from 'react'
-import type { Routes } from '@/@types/routes'
+
+import { lazy } from 'react';
+import sharedRoutes from './sharedRoutes';
+import type { Routes } from '@/@types/routes';
 
 const authRoute: Routes = [
     {
@@ -26,12 +28,7 @@ const authRoute: Routes = [
         component: lazy(() => import('@/views/auth/ResetPassword')),
         authority: [],
     },
-    {
-        key: 'homePage',
-        path: `/hello`,
-        component: lazy(() => import('@/views/Home')),
-        authority: []
-    },
-]
+    ...sharedRoutes,  // <-- inject shared routes here
+];
 
-export default authRoute
+export default authRoute;
